@@ -21,7 +21,21 @@ const plantsSchema = new schema({
     stock: String
 });
 
+const ordersSchema = new schema({
+    _id: String,
+    name: String,
+    email: String,
+    phone: Number,
+    address: String,
+    order_id: String,
+    pay_status: String,
+    pay_type: String,
+    date: String,
+    cartData: Array
+});
+
 const IndoorPlants = mongoose.model('IndoorPlants', plantsSchema, 'indoor-plants');
+const Payments = mongoose.model('Payments', ordersSchema, 'payments');
 
 app.get('/', (req, res) => {
     res.send('Server is running on port 3000....');
@@ -34,6 +48,16 @@ app.get('/indoor-plants', (req, res) => {
        }) .catch(err => {
         res.send(err);
        });
+});
+
+app.get('/orders/:phone', (req, res) => {
+    Payments.find({phone: req.params.phone})
+    .then(data => {
+        res.send(data);
+    })
+    .catch(err => {
+        res.send(err);
+    });
 });
 
 app.listen(port, () => {
