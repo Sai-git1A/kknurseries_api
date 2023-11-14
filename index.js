@@ -28,13 +28,12 @@ app.get('/', (req, res) => {
 });
 
 app.get('/indoor-plants', (req, res) => {
-    IndoorPlants.find({}, (err, plants) => {
-        if (err) {
-            res.send(err);
-        } else {
-            res.send(plants);
-        }
-    }); 
+    IndoorPlants.find({})
+       .then(data => {
+        res.send(data);
+       }) .catch(err => {
+        res.send(err);
+       });
 });
 
 app.listen(port, () => {
