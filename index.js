@@ -20,14 +20,14 @@ const plantsSchema = new schema({
     body: Object,
 });
 
-const Plants = mongoose.model('IndoorPlants', plantsSchema, 'indoor-plants');
+const IndoorPlants = mongoose.model('IndoorPlants', plantsSchema, 'indoor-plants');
 
 app.get('/', (req, res) => {
     res.send('Server is running on port 3000....');
 });
 
 app.get('/indoor-plants', (req, res) => {
-    Plants.find({}, (err, plants) => {
+    IndoorPlants.find({}, (err, plants) => {
         if (err) {
             res.send(err);
         } else {
