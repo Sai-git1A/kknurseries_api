@@ -15,9 +15,11 @@ mongoose.connection.on('connected', () => {
 });
 
 const plantsSchema = new schema({
-    _id: String,
-    head: Object,
-    body: Object,
+    id: String,
+    img: String,
+    name: String,
+    price: Number,
+    stock: String
 });
 
 const IndoorPlants = mongoose.model('IndoorPlants', plantsSchema, 'indoor-plants');
