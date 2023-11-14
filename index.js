@@ -8,10 +8,9 @@ const port = process.env.PORT || 3000;
 
 app.use(cors());
 
-mongoose.set('strictQuery', false);
-mongoose.connect(process.env.MONGOURL);
-mongoose.connection.on('connected', () => {
-  console.log('database connected');
+mongoose.connect(process.env.MONGOURL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
 });
 
 const plantsSchema = new schema({
