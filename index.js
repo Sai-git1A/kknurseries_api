@@ -60,6 +60,16 @@ app.get('/orders/:phone', (req, res) => {
     });
 });
 
+app.get('/admin-orders', (req, res) => {
+    Payments.find({})
+    .then(data => {
+        res.send(data);
+    })
+    .catch(err => {
+        res.send(err);
+    });    
+});
+
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
