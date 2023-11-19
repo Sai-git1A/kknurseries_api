@@ -24,6 +24,7 @@ const ordersSchema = new schema({
     name: String,
     email: String,
     phone: Number,
+    amount: Number,
     address: String,
     order_id: String,
     pay_status: String,
