@@ -69,6 +69,29 @@ app.get('/admin-orders', (req, res) => {
     });    
 });
 
+app.get('/weather-location', (req, res) => {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+        console.log("Geolocation is not supported by this browser.");
+    }
+
+    function showPosition(position) {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+        const apikey = process.env.WEATHER_API_KEY;
+        const url = `http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=${apikey}=${lat},${lon}`;
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                res.send(data);
+            })
+            .catch(error => {
+                console.log(error);
+            });        
+    }
+});
+
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
